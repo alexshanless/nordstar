@@ -110,7 +110,7 @@ on every page, no repeated corner-mark JSX in pages.
       company, email, phone, origin, destination, freight description.
 - [x] Delivery: mailto, zero backend (Alex's decision, 2026-08-07). Valid
       submit composes a prefilled mailto to the inbox; server actions and
-      the log seam removed. Addresses (quotes@ / careers@nordstarfreight.com)
+      the log seam removed. Addresses (quotes@ / careers@nordstarfreightmn.com)
       are placeholders pending confirmation.
 - [x] Zod validation client-side from the shared schemas; error and success
       states styled from the tokens (no browser defaults).
@@ -154,8 +154,9 @@ delivery path as the quote form.
 - [x] Deploy to Vercel: live at https://nordstar-tau.vercel.app on the
       alexshanless account (2026-08-08), GitHub repo connected for
       auto-deploys. Earlier deploys on bwx and alexbilba-9241 scopes were
-      wrong accounts and are deleted. Custom domain nordstarfreight.com
-      (apex + www) still pending domain/DNS decision.
+      wrong accounts and are deleted. Custom domain nordstarfreightmn.com
+      (apex + www) attached to the project 2026-08-08; DNS records at
+      Porkbun (A 76.76.21.21 for apex and www) pending Alex.
 - [ ] Lighthouse pass: static pages should be ~100 perf; fix anything under
       90 accessibility (contrast on dark is the likely offender — check
       accent-on-ink text sizes).
@@ -167,9 +168,10 @@ delivery path as the quote form.
 1. Real copy: services offered, coverage area, differentiators, compliance
    numbers (MC/USDOT lines are placeholders in the handoff).
 2. Delivery mechanism decided: mailto, zero backend (2026-08-07). Still
-   need the real inboxes — quotes@ and careers@nordstarfreight.com are
+   need the real inboxes — quotes@ and careers@nordstarfreightmn.com are
    invented placeholders.
-3. Domain and Vercel account/team for deploy.
+3. Resolved 2026-08-08: Vercel account alexshanless, domain
+   nordstarfreightmn.com (registered at Porkbun, DNS pending).
 4. Photography: is there real imagery, or ship type-only until there is?
 5. Careers: real open roles and driver pay/home-time facts, and where
    applications should deliver (same inbox as quotes, or a recruiting one?).

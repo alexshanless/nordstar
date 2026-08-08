@@ -10,7 +10,7 @@
    ───────────────────────────────────────────────────────────────────────── */
 
 /* PLACEHOLDER inbox for quote requests, pending Alex's confirmation. */
-export const QUOTE_EMAIL = "quotes@nordstarfreight.com";
+export const QUOTE_EMAIL = "quotes@nordstarfreightmn.com";
 
 /* A mailto URL the browser hands to the mail client. Values are encoded, so a
    freight description with spaces, ampersands, or line breaks survives. */

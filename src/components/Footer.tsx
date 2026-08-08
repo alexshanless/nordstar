@@ -15,7 +15,7 @@ export default function Footer() {
           <Link href="/contact">Contact</Link>
         </nav>
         <span className="text-muted ns-footer-meta">
-          Minneapolis, MN · nordstarfreight.com
+          Minneapolis, MN · nordstarfreightmn.com
         </span>
       </div>
     </footer>

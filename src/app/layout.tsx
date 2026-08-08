@@ -25,7 +25,7 @@ const description =
   "NordStar Freight is a Minneapolis based carrier running full truckload, less than truckload, and expedited freight across the Upper Midwest and beyond.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://nordstarfreight.com"),
+  metadataBase: new URL("https://nordstarfreightmn.com"),
   title: {
     default: "NordStar Freight",
     template: "%s · NordStar Freight",
@@ -51,8 +51,8 @@ const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "NordStar Freight",
-  url: "https://nordstarfreight.com",
-  logo: "https://nordstarfreight.com/brand/signature-mark-outline-112.png",
+  url: "https://nordstarfreightmn.com",
+  logo: "https://nordstarfreightmn.com/brand/signature-mark-outline-112.png",
   description,
   address: {
     "@type": "PostalAddress",

@@ -56,4 +56,4 @@ export const jobs: Job[] = [
 /* PLACEHOLDER recruiting inbox, pending Alex's confirmation (PLAN.md open
    questions 2 and 5). Single source for the careers address: the job cards,
    the office-roles note, and the driver application's mailto all read it. */
-export const RESUME_EMAIL = "careers@nordstarfreight.com";
+export const RESUME_EMAIL = "careers@nordstarfreightmn.com";
