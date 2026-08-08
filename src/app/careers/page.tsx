@@ -5,13 +5,13 @@ import { RESUME_EMAIL, jobs } from "@/content/jobs";
 import { social } from "@/lib/metadata";
 
 const description =
-  "Drive for NordStar Freight. Pay, home time, lanes, and equipment, plus open dispatch and operations roles in Minneapolis.";
+  "CDL Class A driver jobs in Minneapolis, MN with NordStar Freight. Regional and over the road lanes, pay and home time in plain numbers, plus dispatch and operations roles.";
 
 export const metadata: Metadata = {
-  title: "Careers",
+  title: "CDL Driver Jobs in Minneapolis, MN",
   description,
   ...social({
-    title: "Careers at NordStar Freight",
+    title: "CDL Driver Jobs in Minneapolis, MN · NordStar Freight",
     description,
     url: "/careers",
   }),

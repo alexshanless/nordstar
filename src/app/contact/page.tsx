@@ -5,13 +5,13 @@ import { QUOTE_EMAIL } from "@/lib/contact";
 import { social } from "@/lib/metadata";
 
 const description =
-  "Request a freight quote from NordStar Freight, or reach dispatch by phone. Origin, destination, and what you are shipping is enough to start.";
+  "Request a freight quote from NordStar Freight in Minneapolis, MN or reach dispatch by phone. Origin, destination, and what you are shipping is enough to start.";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Request a Freight Quote",
   description,
   ...social({
-    title: "Contact NordStar Freight",
+    title: "Request a Freight Quote · NordStar Freight",
     description,
     url: "/contact",
   }),

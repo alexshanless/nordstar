@@ -22,16 +22,20 @@ const barlowCondensed = Barlow_Condensed({
 });
 
 const description =
-  "NordStar Freight is a Minneapolis based carrier running full truckload, less than truckload, and expedited freight across the Upper Midwest and beyond.";
+  "NordStar Freight is a trucking company in Minneapolis, MN running full truckload, less than truckload, and expedited freight across the Upper Midwest and beyond. Request a quote with origin, destination, and load details.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://nordstarfreightmn.com"),
   title: {
-    default: "NordStar Freight",
+    default: "NordStar Freight · Trucking Company in Minneapolis, MN",
     template: "%s · NordStar Freight",
   },
   description,
-  ...social({ title: "NordStar Freight", description, url: "/" }),
+  ...social({
+    title: "NordStar Freight · Trucking Company in Minneapolis, MN",
+    description,
+    url: "/",
+  }),
 };
 
 /* Restore a stored theme choice before the browser paints. Runs synchronously

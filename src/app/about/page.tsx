@@ -4,13 +4,13 @@ import Blueprint from "@/components/Blueprint";
 import { social } from "@/lib/metadata";
 
 const description =
-  "NordStar Freight is a Minneapolis based carrier. Who we are, the lanes we run, and how we handle safety and compliance.";
+  "NordStar Freight is an asset based freight carrier in Minneapolis, MN. Our own trucks and drivers, Upper Midwest lanes, and our safety and compliance record.";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About Our Trucking Company",
   description,
   ...social({
-    title: "About NordStar Freight",
+    title: "About Our Trucking Company · NordStar Freight",
     description,
     url: "/about",
   }),
