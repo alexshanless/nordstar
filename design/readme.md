@@ -34,13 +34,19 @@ the steel accent and icons are thin-stroke (Lucide at stroke-width 1.5).
   the favicon is `src/app/icon.svg` (theme-adaptive star). The lockups draw in
   `currentColor` off `--ns-logo-tone`, which is how the one-colour system
   picks its black or white variant per scheme.
-- The site follows the visitor's OS colour preference, no toggle. Light is
-  this system as written here: paper ground, ink text, interactive states
-  stepping darker down the accent ramp. Dark is the theme's dark band, and
-  every dark-ground rule (token swap, lighter interactive steps, ambient
-  shadows) is scoped to `@media (prefers-color-scheme: dark)` in
-  `src/styles/nordstar.css`. Nothing outside that block may assume an ink
-  ground: derive from a token so it flips, or write both values.
+- The site follows the visitor's OS colour preference by default, and the
+  header carries a switch that forces either ground. Light is this system as
+  written here: paper ground, ink text, interactive states stepping darker down
+  the accent ramp. Dark is the theme's dark band, with lighter interactive
+  steps and ambient shadows. Both live in `src/styles/nordstar.css` as
+  `light-dark()` token pairs, and the only thing that picks between them is
+  `color-scheme` on `:root`: `light dark` with no attribute, pinned by
+  `[data-theme="light"]` or `[data-theme="dark"]`. Nothing may assume a ground:
+  derive from a token so it flips, or write a `light-dark()` pair. Never a
+  `prefers-color-scheme` media query, it cannot see a forced override.
+  The switch is `src/components/ThemeToggle.tsx`; the stored choice
+  (`localStorage` key `ns-theme`) is re-applied before first paint by the
+  inline head script in `src/app/layout.tsx`.
 
 ## Don't
 

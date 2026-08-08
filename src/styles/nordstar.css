@@ -1,83 +1,129 @@
 /* Nordstar overrides on top of the Industry design system (industry.css).
 
-   The site follows the visitor's OS colour preference, no toggle:
+   Two grounds:
 
-     light  industry.css as imported, unchanged. It is the Industry board
-            already: steel accent on the light ground, ink text, ink-tinted
-            shadows, interactive states stepping DARKER down the ramp.
-     dark   the theme's dark band, everything in the
-            @media (prefers-color-scheme: dark) blocks below. Ground and text
-            swap to ink and paper, dividers and shadows are re-derived for the
-            dark ground per the system's own guidance (hairline edge + ambient
-            darkness), and interactive states step toward the LIGHT end of the
-            accent ramp.
+     light  industry.css as imported: steel accent on the light ground, ink
+            text, ink-tinted shadows, interactive states stepping DARKER down
+            the accent ramp.
+     dark   the theme's dark band. Ground and text swap to ink and paper,
+            dividers and shadows are re-derived for the dark ground per the
+            system's own guidance (hairline edge + ambient darkness), and
+            interactive states step toward the LIGHT end of the ramp.
 
-   Rules that live outside the dark block are ground-neutral: they either
-   derive from tokens that flip on their own, or read one of the two semantic
-   aliases below. Nothing outside the dark block may assume an ink ground. */
+   Which one renders is decided in one place, `color-scheme` on :root, and
+   there are three states:
+
+     no data-theme         `light dark`, so the browser follows the visitor's
+                           OS preference. This is the default.
+     [data-theme="light"]  `light`, forced by the header switch.
+     [data-theme="dark"]   `dark`, forced by the header switch.
+
+   Every light/dark difference below is a token whose value is a light-dark()
+   pair, so it resolves off the effective scheme and the same declaration
+   serves all three states. There is no @media (prefers-color-scheme) block in
+   this file: a media query cannot see a forced override, a pair can.
+   The switch is src/components/ThemeToggle.tsx; the no-flash head script that
+   sets data-theme before first paint is in src/app/layout.tsx.
+
+   Nothing here may assume a ground: derive from a token that flips, or write
+   a light-dark() pair. */
 
 :root {
-  /* Native controls (scrollbars, date pickers, the file input) follow the
-     ground; the dark block flips this to `dark`. */
-  color-scheme: light;
+  /* Follow the OS by default. Native controls (scrollbars, date pickers, the
+     file input) and every light-dark() below read this. */
+  color-scheme: light dark;
 
-  /* Accent used as small text or a line on the current ground. On the light
-     ground that is the plain accent, the same step industry.css uses for
-     links and kickers; on ink it steps up the ramp for contrast. */
-  --ns-accent-ink: var(--color-accent);
+  /* — ground, text and rules — */
+  --color-bg: light-dark(#f2f2f3, #1d1f20);
+  --color-surface: light-dark(#e9e9ea, #26282a);
+  --color-text: light-dark(#1d1f20, #f2f2f3);
+  --color-divider: light-dark(
+    color-mix(in srgb, #1d1f20 16%, transparent),
+    color-mix(in srgb, #f2f2f3 18%, transparent)
+  );
+
+  /* Elevation. light-dark() is a colour function, so the pair goes on each
+     layer's colour rather than the whole shadow: the dark ground's hairline
+     ring is present on both and simply transparent on paper, which paints
+     nothing and keeps the light shadow byte-identical to industry.css. */
+  --shadow-sm: 0 0 0 1px light-dark(transparent, color-mix(in srgb, #f2f2f3 7%, transparent)),
+    0 1px 2px light-dark(color-mix(in srgb, #2b2b2d 14%, transparent), color-mix(in srgb, #000 40%, transparent));
+  --shadow-md: 0 0 0 1px light-dark(transparent, color-mix(in srgb, #f2f2f3 7%, transparent)),
+    0 3px 10px light-dark(color-mix(in srgb, #2b2b2d 16%, transparent), color-mix(in srgb, #000 45%, transparent));
+  --shadow-lg: 0 0 0 1px light-dark(transparent, color-mix(in srgb, #f2f2f3 8%, transparent)),
+    0 12px 32px light-dark(color-mix(in srgb, #2b2b2d 22%, transparent), color-mix(in srgb, #000 55%, transparent));
+
+  /* Accent used as small text, a line, or an interactive label on the current
+     ground. On paper that is the plain accent, the same step industry.css
+     uses for links and kickers; on ink it steps up the ramp for contrast. */
+  --ns-accent-ink: light-dark(var(--color-accent), var(--color-accent-400));
 
   /* Accent used to flag an invalid field. There is no red on this system, so
      an error reads as an off-ramp steel step plus a message. On paper the
      step has to go DARKER than the plain accent to clear small-text
      contrast; on ink it goes lighter. */
-  --ns-accent-alert: var(--color-accent-700);
+  --ns-accent-alert: light-dark(var(--color-accent-700), var(--color-accent-300));
 
   /* The logo is a one-colour system with exactly two variants in the handoff,
      true black and true white, which is why this is not --color-text: the
      paper token is off-white and the mark is meant to be drawn in the pure
      variant. Both lockups in src/components/Logo.tsx read it as currentColor,
-     so the black variant renders here and the white one in the dark block. */
-  --ns-logo-tone: #1d1f20;
+     so this is where the black or the white variant is chosen. */
+  --ns-logo-tone: light-dark(#1d1f20, #ffffff);
+
+  /* — interactive steps. On a dark ground they move up the ramp (lighter),
+       not down; the light halves repeat industry.css's own values so the
+       paper ground is unchanged. Primary keeps the steel fill and its label
+       takes the ground token, so the knockout flips on its own. — */
+  --ns-btn-primary-hover-bg: light-dark(var(--color-accent-600), var(--color-accent-500));
+  --ns-btn-primary-hover-border: light-dark(var(--color-accent), var(--color-accent-500));
+  --ns-btn-primary-active-bg: light-dark(var(--color-accent-700), var(--color-accent-400));
+  --ns-btn-primary-active-border: light-dark(var(--color-accent), var(--color-accent-400));
+  --ns-btn-ghost-hover-bg: light-dark(
+    color-mix(in srgb, var(--color-accent) 10%, transparent),
+    color-mix(in srgb, var(--color-accent-400) 12%, transparent)
+  );
+  --ns-btn-ghost-active-bg: light-dark(
+    color-mix(in srgb, var(--color-accent) 18%, transparent),
+    color-mix(in srgb, var(--color-accent-400) 20%, transparent)
+  );
+  /* Secondary washes with the text token, so it flips on its own; only the
+     hover strength differs, one step stronger on the darker ground to land
+     the same visual value. :active is 14% on both, industry.css's rule
+     stands. */
+  --ns-btn-secondary-hover-bg: light-dark(
+    color-mix(in srgb, var(--color-text) 7%, transparent),
+    color-mix(in srgb, var(--color-text) 8%, transparent)
+  );
+
+  /* Theme switch icons: the inked one on this ground, the other transparent.
+     Same 70% text as the nav links so the button reads as chrome. */
+  --ns-toggle-sun: light-dark(transparent, color-mix(in srgb, var(--color-text) 70%, transparent));
+  --ns-toggle-moon: light-dark(color-mix(in srgb, var(--color-text) 70%, transparent), transparent);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
+/* The switch pins the scheme. Tokens above need no second copy: every
+   light-dark() re-resolves off these. */
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
 
-    --color-bg: #1d1f20;
-    --color-surface: #26282a;
-    --color-text: #f2f2f3;
-    --color-divider: color-mix(in srgb, #f2f2f3 18%, transparent);
-
-    --shadow-sm: 0 0 0 1px color-mix(in srgb, #f2f2f3 7%, transparent),
-      0 1px 2px color-mix(in srgb, #000 40%, transparent);
-    --shadow-md: 0 0 0 1px color-mix(in srgb, #f2f2f3 7%, transparent),
-      0 3px 10px color-mix(in srgb, #000 45%, transparent);
-    --shadow-lg: 0 0 0 1px color-mix(in srgb, #f2f2f3 8%, transparent),
-      0 12px 32px color-mix(in srgb, #000 55%, transparent);
-
-    --ns-accent-ink: var(--color-accent-400);
-    --ns-accent-alert: var(--color-accent-300);
-    --ns-logo-tone: #ffffff;
-  }
-
-  /* On a dark ground interactive steps move up the ramp (lighter), not down.
-     Primary keeps the steel fill; its label takes the ink ground (knockout).
-     On light, industry.css's own 600/700 steps stand. */
-  .btn-primary:hover { background: var(--color-accent-500); border-color: var(--color-accent-500); }
-  .btn-primary:active { background: var(--color-accent-400); border-color: var(--color-accent-400); }
-  .btn-ghost { color: var(--color-accent-400); }
-  .btn-ghost:hover { background: color-mix(in srgb, var(--color-accent-400) 12%, transparent); }
-  .btn-ghost:active { background: color-mix(in srgb, var(--color-accent-400) 20%, transparent); }
-  /* Paper wash rather than industry's ink wash, one step stronger so it
-     lands the same visual value on the darker ground. */
-  .btn-secondary:hover { background: color-mix(in srgb, var(--color-text) 8%, transparent); }
-  .btn-secondary:active { background: color-mix(in srgb, var(--color-text) 14%, transparent); }
-
-  /* Accent-colored small text takes a light ramp step for contrast on ink. */
-  .nav a:hover, .nav a[aria-current='page'] { color: var(--color-accent-400); }
-  a { color: var(--color-accent-400); }
+.btn-primary:hover {
+  background: var(--ns-btn-primary-hover-bg);
+  border-color: var(--ns-btn-primary-hover-border);
 }
+.btn-primary:active {
+  background: var(--ns-btn-primary-active-bg);
+  border-color: var(--ns-btn-primary-active-border);
+}
+.btn-ghost { color: var(--ns-accent-ink); }
+.btn-ghost:hover { background: var(--ns-btn-ghost-hover-bg); }
+.btn-ghost:active { background: var(--ns-btn-ghost-active-bg); }
+.btn-secondary:hover { background: var(--ns-btn-secondary-hover-bg); }
+
+/* Accent-coloured small text and links take the ramp step that clears the
+   current ground. */
+.nav a:hover, .nav a[aria-current='page'] { color: var(--ns-accent-ink); }
+a { color: var(--ns-accent-ink); }
 
 /* Brand (logo handoff): logo hover and focus. No animation on the mark.
    The outline takes the text token rather than the accent so the ring clears
@@ -115,10 +161,27 @@
 }
 .ns-nav a:hover, .ns-nav a[aria-current="page"] { color: var(--ns-accent-ink); }
 
+/* — theme switch: 36px icon button on the hairline border grammar, sitting to
+     the right of the nav. Both icons are always in the DOM, stacked in one
+     grid cell, and the effective scheme inks one and makes the other
+     transparent. That is a token value, so the icon is right on the first
+     paint with no state, no effect and no flash. — */
+/* 30px, not .btn-icon's 36px: the header's content box is the 30px logo mark
+   (54px min-height less 12px padding either side), and a taller control would
+   push every page down 6px. */
+.ns-theme-toggle {
+  display: grid; place-items: center; flex: none;
+  width: 30px; height: 30px; margin-left: 18px;
+}
+.ns-theme-toggle > svg { grid-area: 1 / 1; }
+.ns-theme-toggle .ns-icon-sun { color: var(--ns-toggle-sun); }
+.ns-theme-toggle .ns-icon-moon { color: var(--ns-toggle-moon); }
+
 /* Under 640px the header keeps the 30px mark and drops the wordmark. */
 @media (max-width: 639px) {
   .ns-logo-wordmark { display: none; }
   .ns-nav { gap: 12px; }
+  .ns-theme-toggle { margin-left: 12px; }
 }
 
 /* — page scaffolding — */

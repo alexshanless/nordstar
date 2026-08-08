@@ -34,10 +34,24 @@ export const metadata: Metadata = {
   ...social({ title: "NordStar Freight", description, url: "/" }),
 };
 
-/* Browser UI colour, paired to the same preference the stylesheet follows
-   (light = the Industry paper ground, dark = the ink band), so the address
-   bar matches the page on both. themeColor belongs to the `viewport` export,
-   not `metadata`. */
+/* Restore a stored theme choice before the browser paints. Runs synchronously
+   while the head is parsed, so the forced ground is on <html> before any
+   content is painted and there is no flash of the other theme. No override
+   stored means no attribute, and nordstar.css follows the OS preference.
+   Keep it tiny and dependency free: it is inline on every page, and the
+   try/catch covers storage being unavailable (private mode, blocked cookies).
+   See node_modules/next/dist/docs/01-app/02-guides/preventing-flash-before-hydration.md.
+   The matching switch is src/components/ThemeToggle.tsx. */
+const themeScript =
+  '(function(){try{var t=localStorage.getItem("ns-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}})()';
+
+/* Browser UI colour, paired to the OS preference the stylesheet follows by
+   default (light = the Industry paper ground, dark = the ink band), so the
+   address bar matches the page on both. themeColor belongs to the `viewport`
+   export, not `metadata`. Note these media pairs track the OS preference only:
+   a visitor who forces the other ground with the header switch keeps the
+   address bar tint of their OS preference. Cosmetic, browser chrome only,
+   the page itself is correct. */
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#f2f2f3" },
@@ -67,7 +81,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${barlow.variable} ${barlowCondensed.variable} h-full antialiased`}
+      /* the head script sets data-theme on this element before React hydrates */
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="min-h-full flex flex-col">
         <script
           type="application/ld+json"

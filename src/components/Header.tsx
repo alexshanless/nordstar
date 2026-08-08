@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Logo from "@/components/Logo";
+import ThemeToggle from "@/components/ThemeToggle";
 
 /* Site header. Client component only for the 80px scroll threshold, which
    adds the handoff's hairline shadow. The logo never swaps or shrinks. */
@@ -40,6 +41,7 @@ export default function Header() {
           </Link>
         ))}
       </nav>
+      <ThemeToggle />
     </header>
   );
 }
