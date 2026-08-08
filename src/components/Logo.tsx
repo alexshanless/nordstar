@@ -14,49 +14,52 @@ import Link from "next/link";
    The star's longer lower point is deliberate — do not "correct" it. */
 
 const STAR_PATH = "M50 2 Q52.6 40 92 44 Q52.6 48 50 98 Q47.4 48 8 44 Q47.4 40 50 2 Z";
-const INK = "#1D1F20";
-const PAPER = "#FFFFFF";
 const MONOGRAM_FONT =
   'var(--font-barlow-condensed), "Barlow Condensed", "Arial Narrow", Arial, sans-serif';
 
-type Tone = "black" | "white";
-const c = (tone: Tone) => (tone === "white" ? PAPER : INK);
+/* One colour, both grounds. The handoff ships a black variant and a white
+   variant of every lockup; here the mark and the wordmark draw in
+   `currentColor` and each lockup sets `color: var(--ns-logo-tone)`, which
+   nordstar.css resolves to the black variant on the light ground and the
+   white one on the dark ground. No prop to pass, no asset to swap. Full
+   strength always, the mark is never screened back. */
+const TONE = { color: "var(--ns-logo-tone)" } as const;
 
-function EtchedMark({ size, tone }: { size: number; tone: Tone }) {
+function EtchedMark({ size }: { size: number }) {
   return (
     <svg viewBox="0 0 120 120" width={size} height={size} aria-hidden="true">
-      <polygon points="60,4 111,32 111,88 60,116 9,88 9,32" fill="none" stroke={c(tone)} strokeWidth="6" />
-      <polygon points="60,17 100,39 100,81 60,103 20,81 20,39" fill="none" stroke={c(tone)} strokeWidth="1.5" />
-      <text x="45" y="76" textAnchor="middle" fontFamily={MONOGRAM_FONT} fontWeight="800" fontSize="44" fill={c(tone)}>N</text>
-      <text x="75" y="76" textAnchor="middle" fontFamily={MONOGRAM_FONT} fontWeight="800" fontSize="44" fill={c(tone)}>S</text>
+      <polygon points="60,4 111,32 111,88 60,116 9,88 9,32" fill="none" stroke="currentColor" strokeWidth="6" />
+      <polygon points="60,17 100,39 100,81 60,103 20,81 20,39" fill="none" stroke="currentColor" strokeWidth="1.5" />
+      <text x="45" y="76" textAnchor="middle" fontFamily={MONOGRAM_FONT} fontWeight="800" fontSize="44" fill="currentColor">N</text>
+      <text x="75" y="76" textAnchor="middle" fontFamily={MONOGRAM_FONT} fontWeight="800" fontSize="44" fill="currentColor">S</text>
       <g transform="translate(60 61) scale(0.13) translate(-50 -48)">
-        <path d={STAR_PATH} fill={c(tone)} />
+        <path d={STAR_PATH} fill="currentColor" />
       </g>
     </svg>
   );
 }
 
-function EtchedMarkSmall({ size, tone }: { size: number; tone: Tone }) {
+function EtchedMarkSmall({ size }: { size: number }) {
   return (
     <svg viewBox="0 0 120 120" width={size} height={size} aria-hidden="true">
-      <polygon points="60,4 111,32 111,88 60,116 9,88 9,32" fill="none" stroke={c(tone)} strokeWidth="8" />
-      <text x="44" y="78" textAnchor="middle" fontFamily={MONOGRAM_FONT} fontWeight="800" fontSize="46" fill={c(tone)}>N</text>
-      <text x="76" y="78" textAnchor="middle" fontFamily={MONOGRAM_FONT} fontWeight="800" fontSize="46" fill={c(tone)}>S</text>
+      <polygon points="60,4 111,32 111,88 60,116 9,88 9,32" fill="none" stroke="currentColor" strokeWidth="8" />
+      <text x="44" y="78" textAnchor="middle" fontFamily={MONOGRAM_FONT} fontWeight="800" fontSize="46" fill="currentColor">N</text>
+      <text x="76" y="78" textAnchor="middle" fontFamily={MONOGRAM_FONT} fontWeight="800" fontSize="46" fill="currentColor">S</text>
     </svg>
   );
 }
 
 /* Primary lockup — marketing pages, footers. 66px etched mark, two-line
    NORDSTAR / FREIGHT wordmark. Never below a 40px mark. */
-export function LogoLockup({ tone = "white" }: { tone?: Tone }) {
+export function LogoLockup() {
   return (
-    <span style={{ display: "inline-flex", alignItems: "center", gap: 16 }}>
-      <EtchedMark size={66} tone={tone} />
+    <span style={{ display: "inline-flex", alignItems: "center", gap: 16, ...TONE }}>
+      <EtchedMark size={66} />
       <span style={{ display: "flex", flexDirection: "column" }}>
         <span
           style={{
             fontFamily: MONOGRAM_FONT, fontWeight: 800, fontSize: 34,
-            lineHeight: 0.94, letterSpacing: "0.01em", color: c(tone),
+            lineHeight: 0.94, letterSpacing: "0.01em",
           }}
         >
           NORDSTAR
@@ -64,7 +67,7 @@ export function LogoLockup({ tone = "white" }: { tone?: Tone }) {
         <span
           style={{
             fontFamily: MONOGRAM_FONT, fontWeight: 600, fontSize: 12,
-            letterSpacing: "0.40em", color: c(tone),
+            letterSpacing: "0.40em",
           }}
         >
           FREIGHT
@@ -76,22 +79,24 @@ export function LogoLockup({ tone = "white" }: { tone?: Tone }) {
 
 /* Site header logo — 30px small mark + NORDSTAR only, links to root.
    Hover opacity 0.85; no animation on the mark, ever. */
-export default function Logo({ tone = "white" }: { tone?: Tone }) {
+export default function Logo() {
   return (
     <Link
       href="/"
       aria-label="NordStar Freight — home"
       className="ns-logo"
-      style={{ display: "inline-flex", alignItems: "center", gap: 12, textDecoration: "none" }}
+      /* `color` is set here rather than inherited: this is an <a>, so
+         industry.css's link rule would otherwise draw the mark in steel. */
+      style={{ display: "inline-flex", alignItems: "center", gap: 12, textDecoration: "none", ...TONE }}
     >
-      <EtchedMarkSmall size={30} tone={tone} />
+      <EtchedMarkSmall size={30} />
       {/* Dropped under 640px by .ns-logo-wordmark in nordstar.css — the 30px
           mark carries the header on its own at that width. */}
       <span
         className="ns-logo-wordmark"
         style={{
           fontFamily: MONOGRAM_FONT, fontWeight: 800, fontSize: 19,
-          lineHeight: 1, color: c(tone),
+          lineHeight: 1,
         }}
       >
         NORDSTAR

@@ -17,15 +17,21 @@ called done.
 
 - Tokens only. Every color, font, space, radius, shadow comes from the CSS
   variables in `src/styles/industry.css`. Never hard-code a hex, font name,
-  or px value the tokens carry. Dark-band overrides live in
-  `src/styles/nordstar.css` — the site is dark-theme only.
+  or px value the tokens carry. The site follows the visitor's OS colour
+  preference, no toggle: light is `industry.css` as imported, dark is the
+  band in `src/styles/nordstar.css`. Every dark-ground rule sits inside
+  `@media (prefers-color-scheme: dark)` there; anything outside that block
+  must derive from a token so it flips, or carry an explicit light/dark pair.
 - Blueprint grammar: cards, figures, and primary buttons are square-cornered,
   hairline-bordered, with four corner registration marks. Use the
   `Blueprint` component (`src/components/Blueprint.tsx`), never hand-write
   the corner `<i>` fragment. Cards and figures stay transparent line
   drawings; the solid steel primary button is the only filled object.
-- Dark ground: interactive states step LIGHTER (accent-400/500). Small
-  accent text uses `--color-accent-400`.
+- Interactive states step LIGHTER on the dark ground (accent-400/500) and
+  DARKER on the light one (accent-600/700, industry.css's own steps). Small
+  accent text takes `--ns-accent-ink`, which resolves to the plain accent on
+  paper and accent-400 on ink; an invalid field takes `--ns-accent-alert`
+  (accent-700 on paper, accent-300 on ink).
 - Logo (`src/components/Logo.tsx`, assets in `public/brand/`): never scale
   the two-line lockup below a 40px mark — swap variants instead. No
   animation on the mark, ever. Never screen the logo back with opacity.
@@ -50,7 +56,7 @@ called done.
   form shows a plain mailto fallback link (the no-JS path). No server
   actions, no email provider, no database.
 - Errors and success states styled from tokens, never browser defaults;
-  error color is the steel ramp (`--color-accent-300`), never red.
+  error color is the steel ramp (`--ns-accent-alert`), never red.
 - Content as typed data in `src/content/` (e.g. `jobs.ts`) before reaching
   for MDX or a CMS.
 - Destination inboxes (quotes@ / careers@nordstarfreight.com) are invented

@@ -10,9 +10,12 @@ Check items off as they land.
 - Next.js 16.3.0 (App Router, Turbopack), React 19.2.8, TypeScript strict,
   Tailwind v4. Static prerender, `npm run build` green.
 - Design system: "Industry" (steel-blue blueprint wireframe) imported at
-  `src/styles/industry.css`, dark-band overrides at `src/styles/nordstar.css`.
-  The site is dark-theme only: ink ground `#1d1f20`, paper text `#f2f2f3`,
-  one steel accent `#5980a6`.
+  `src/styles/industry.css`, brand and dark-band overrides at
+  `src/styles/nordstar.css`. One steel accent `#5980a6` on either ground.
+  The site follows the visitor's OS colour preference, no toggle: light is
+  the Industry board as imported (ground `#f2f2f3`, text `#1d1f20`), dark is
+  the band scoped to `@media (prefers-color-scheme: dark)` (ground `#1d1f20`,
+  text `#f2f2f3`).
 - Brand: NordStar Freight one-colour logo system in `public/brand/`
   (production SVGs) and `src/components/Logo.tsx` (`Logo` = header variant,
   `LogoLockup` = primary lockup). Favicon at `src/app/icon.svg`.
@@ -76,7 +79,7 @@ src/
     QuoteForm.tsx         phase 2
   styles/
     industry.css          design system (do not fork casually)
-    nordstar.css          dark theme + brand overrides
+    nordstar.css          brand overrides + the dark-preference band
   content/                phase 3: services as typed data or MDX
 ```
 
@@ -148,8 +151,10 @@ delivery path as the quote form.
 
 ### Phase 4 — ship
 
-- [ ] Deploy to Vercel (project not created yet), custom domain
-      nordstarfreight.com, both apex and www.
+- [x] Deploy to Vercel: live at https://nordstar-nu.vercel.app on the
+      alexbilba-9241s-projects scope (2026-08-07, NOT the bwx team per
+      Alex). Custom domain nordstarfreight.com (apex + www) still pending
+      domain/DNS decision.
 - [ ] Lighthouse pass: static pages should be ~100 perf; fix anything under
       90 accessibility (contrast on dark is the likely offender — check
       accent-on-ink text sizes).

@@ -31,8 +31,16 @@ the steel accent and icons are thin-stroke (Lucide at stroke-width 1.5).
   Production artwork is in `public/brand/`; the header logo and primary
   lockup are inline React components in `src/components/Logo.tsx` (inlined so
   the monogram's live `<text>` can use the next/font Barlow Condensed);
-  the favicon is `src/app/icon.svg` (theme-adaptive star). The site runs the
-  dark band — token overrides live in `src/styles/nordstar.css`.
+  the favicon is `src/app/icon.svg` (theme-adaptive star). The lockups draw in
+  `currentColor` off `--ns-logo-tone`, which is how the one-colour system
+  picks its black or white variant per scheme.
+- The site follows the visitor's OS colour preference, no toggle. Light is
+  this system as written here: paper ground, ink text, interactive states
+  stepping darker down the accent ramp. Dark is the theme's dark band, and
+  every dark-ground rule (token swap, lighter interactive steps, ambient
+  shadows) is scoped to `@media (prefers-color-scheme: dark)` in
+  `src/styles/nordstar.css`. Nothing outside that block may assume an ink
+  ground: derive from a token so it flips, or write both values.
 
 ## Don't
 

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Barlow, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
 import "@/styles/industry.css";
@@ -32,6 +32,17 @@ export const metadata: Metadata = {
   },
   description,
   ...social({ title: "NordStar Freight", description, url: "/" }),
+};
+
+/* Browser UI colour, paired to the same preference the stylesheet follows
+   (light = the Industry paper ground, dark = the ink band), so the address
+   bar matches the page on both. themeColor belongs to the `viewport` export,
+   not `metadata`. */
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f2f2f3" },
+    { media: "(prefers-color-scheme: dark)", color: "#1d1f20" },
+  ],
 };
 
 /* Organization schema for search engines. Only facts already published on
