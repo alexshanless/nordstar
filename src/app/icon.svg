@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- NordStar favicon — handoff assets favicon-star.svg / favicon-star-white.svg
+       merged: swaps ink/paper with the browser UI theme. Star geometry is
+       verbatim; the longer lower point is deliberate. -->
+  <style>
+    .hex { fill: #1D1F20; }
+    .star { fill: #FFFFFF; }
+    @media (prefers-color-scheme: dark) {
+      .hex { fill: #FFFFFF; }
+      .star { fill: #1D1F20; }
+    }
+  </style>
+  <polygon class="hex" points="60,4 111,32 111,88 60,116 9,88 9,32"/>
+  <g transform="translate(60 60) scale(0.42) translate(-50 -48)">
+    <path class="star" d="M50 2 Q52.6 40 92 44 Q52.6 48 50 98 Q47.4 48 8 44 Q47.4 40 50 2 Z"/>
+  </g>
+</svg>
