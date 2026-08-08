@@ -151,10 +151,11 @@ delivery path as the quote form.
 
 ### Phase 4 — ship
 
-- [x] Deploy to Vercel: live at https://nordstar-nu.vercel.app on the
-      alexbilba-9241s-projects scope (2026-08-07, NOT the bwx team per
-      Alex). Custom domain nordstarfreight.com (apex + www) still pending
-      domain/DNS decision.
+- [x] Deploy to Vercel: live at https://nordstar-tau.vercel.app on the
+      alexshanless account (2026-08-08), GitHub repo connected for
+      auto-deploys. Earlier deploys on bwx and alexbilba-9241 scopes were
+      wrong accounts and are deleted. Custom domain nordstarfreight.com
+      (apex + www) still pending domain/DNS decision.
 - [ ] Lighthouse pass: static pages should be ~100 perf; fix anything under
       90 accessibility (contrast on dark is the likely offender — check
       accent-on-ink text sizes).
