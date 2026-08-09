@@ -214,6 +214,13 @@ a { color: var(--ns-accent-ink); }
   padding-block: 48px 56px;
 }
 .ns-footer-nav { display: flex; flex-wrap: wrap; gap: 16px; }
+/* Legal links: same footer row, one step down in size and ink so the route
+   links stay primary. Hover still lands on the accent, like every other nav
+   link. */
+.ns-footer-nav a.ns-footer-legal {
+  font-size: 11px;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+}
 .ns-footer-meta { font-size: 13px; }
 
 /* — forms: field grid plus validation and success states. There is no
