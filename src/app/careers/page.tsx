@@ -3,9 +3,10 @@ import Blueprint from "@/components/Blueprint";
 import DriverApplicationForm from "@/components/DriverApplicationForm";
 import { RESUME_EMAIL, jobs } from "@/content/jobs";
 import { social } from "@/lib/metadata";
+import { HOME_BASE, SITE_NAME, SITE_URL } from "@/lib/site";
 
 const description =
-  "Owner operator opportunities with NordStar Freight in Minneapolis, MN. Pay and lane details upon request. Dispatch and operations roles also listed.";
+  "Lease on as an owner operator with NordStar Freight in Minneapolis, MN. Upper Midwest lanes. Pay and job details upon request. Office and dispatch roles also listed.";
 
 export const metadata: Metadata = {
   title: "Owner Operator Jobs in Minneapolis, MN",
@@ -24,6 +25,40 @@ const driverTerms = [
 
 const driverJobs = jobs.filter((job) => job.type === "driver");
 const officeJobs = jobs.filter((job) => job.type === "office");
+
+const jobPostingJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": driverJobs.map((job) => ({
+    "@type": "JobPosting",
+    title: job.title,
+    description: [job.summary, ...job.requirements.map((r) => `• ${r}`)].join(
+      "\n",
+    ),
+    datePosted: "2026-08-28",
+    employmentType: "CONTRACTOR",
+    hiringOrganization: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      sameAs: SITE_URL,
+      logo: `${SITE_URL}/brand/signature-mark-outline-112.png`,
+    },
+    jobLocation: {
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: HOME_BASE.locality,
+        addressRegion: HOME_BASE.region,
+        addressCountry: HOME_BASE.country,
+      },
+    },
+    applicantLocationRequirements: {
+      "@type": "Country",
+      name: "US",
+    },
+    directApply: true,
+    url: `${SITE_URL}/careers`,
+  })),
+};
 
 function JobList({ items }: { items: typeof jobs }) {
   if (items.length === 0) {
@@ -60,13 +95,17 @@ function JobList({ items }: { items: typeof jobs }) {
 export default function CareersPage() {
   return (
     <div className="ns-container">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPostingJsonLd) }}
+      />
       <section className="ns-hero">
         <p className="ns-eyebrow">Careers</p>
         <h1 className="ns-h1">Drive for NordStar</h1>
         <p className="text-muted ns-lede">
           We lease on owner operators only. Steady Upper Midwest lanes out of
-          Minneapolis, a dispatcher who answers, and terms we walk through with
-          you directly.
+          Minneapolis, a dispatcher on your board, and terms we walk through
+          with you by email.
         </p>
       </section>
 

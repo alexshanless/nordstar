@@ -5,7 +5,17 @@ import "@/styles/industry.css";
 import "@/styles/nordstar.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { CONTACT_EMAIL, DISPATCH_EMAIL } from "@/lib/contact";
 import { social } from "@/lib/metadata";
+import {
+  AREA_SERVED,
+  HOME_BASE,
+  MC_NUMBER,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+  USDOT_NUMBER,
+} from "@/lib/site";
 
 const barlow = Barlow({
   weight: ["400", "500", "700"],
@@ -21,19 +31,20 @@ const barlowCondensed = Barlow_Condensed({
   variable: "--font-barlow-condensed",
 });
 
-const description =
-  "NordStar Freight is a trucking company in Minneapolis, MN running full truckload, less than truckload, and expedited freight across the Upper Midwest and beyond. Request a quote with origin, destination, and load details.";
-
 export const metadata: Metadata = {
-  metadataBase: new URL("https://nordstarfreightmn.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "NordStar Freight · Trucking Company in Minneapolis, MN",
-    template: "%s · NordStar Freight",
+    default: `${SITE_NAME} · Trucking Company in Minneapolis, MN`,
+    template: `%s · ${SITE_NAME}`,
   },
-  description,
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  category: "transportation",
+  robots: { index: true, follow: true },
+  formatDetection: { telephone: false, email: false, address: false },
   ...social({
-    title: "NordStar Freight · Trucking Company in Minneapolis, MN",
-    description,
+    title: `${SITE_NAME} · Trucking Company in Minneapolis, MN`,
+    description: SITE_DESCRIPTION,
     url: "/",
   }),
 };
@@ -63,21 +74,68 @@ export const viewport: Viewport = {
   ],
 };
 
-/* Organization schema for search engines. Only facts already published on
-   the site. */
+/* Organization + WebSite schema from facts already published on the site. */
 const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "NordStar Freight",
-  url: "https://nordstarfreightmn.com",
-  logo: "https://nordstarfreightmn.com/brand/signature-mark-outline-112.png",
-  description,
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Minneapolis",
-    addressRegion: "MN",
-    addressCountry: "US",
-  },
+  "@graph": [
+    {
+      "@type": ["Organization", "LocalBusiness"],
+      "@id": `${SITE_URL}/#organization`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: `${SITE_URL}/brand/signature-mark-outline-112.png`,
+      image: `${SITE_URL}/brand/signature-mark-outline-112.png`,
+      description: SITE_DESCRIPTION,
+      email: [DISPATCH_EMAIL, CONTACT_EMAIL],
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: HOME_BASE.locality,
+        addressRegion: HOME_BASE.region,
+        addressCountry: HOME_BASE.country,
+      },
+      areaServed: AREA_SERVED.map((name) => ({
+        "@type": "AdministrativeArea",
+        name,
+      })),
+      identifier: [
+        {
+          "@type": "PropertyValue",
+          name: "USDOT",
+          value: USDOT_NUMBER,
+        },
+        {
+          "@type": "PropertyValue",
+          name: "MC",
+          value: MC_NUMBER,
+        },
+      ],
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          contactType: "sales",
+          email: DISPATCH_EMAIL,
+          areaServed: "US",
+          availableLanguage: "English",
+        },
+        {
+          "@type": "ContactPoint",
+          contactType: "customer support",
+          email: CONTACT_EMAIL,
+          areaServed: "US",
+          availableLanguage: "English",
+        },
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: SITE_NAME,
+      description: SITE_DESCRIPTION,
+      publisher: { "@id": `${SITE_URL}/#organization` },
+      inLanguage: "en-US",
+    },
+  ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
