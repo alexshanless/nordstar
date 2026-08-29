@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Blueprint from "@/components/Blueprint";
 import QuoteForm from "@/components/QuoteForm";
-import { QUOTE_EMAIL } from "@/lib/contact";
+import { CONTACT_EMAIL, DISPATCH_EMAIL } from "@/lib/contact";
 import { social } from "@/lib/metadata";
 
 const description =
-  "Request a freight quote from NordStar Freight in Minneapolis, MN or reach dispatch by phone. Origin, destination, and what you are shipping is enough to start.";
+  "Request a freight quote from NordStar Freight in Minneapolis, MN by email. Origin, destination, and what you are shipping is enough to start.";
 
 export const metadata: Metadata = {
   title: "Request a Freight Quote",
@@ -17,13 +17,18 @@ export const metadata: Metadata = {
   }),
 };
 
-/* Placeholder contact details until Alex confirms the real lines and inbox
-   (PLAN.md open questions 1 and 2). */
 const details = [
-  ["Dispatch", "PLACEHOLDER phone number, 7am to 6pm Central"],
-  ["After hours", "PLACEHOLDER phone number, active loads only"],
-  ["Email", `${QUOTE_EMAIL}, PLACEHOLDER inbox`],
-  ["Office", "Minneapolis, MN"],
+  {
+    label: "Questions",
+    value: DISPATCH_EMAIL,
+    href: `mailto:${DISPATCH_EMAIL}`,
+  },
+  {
+    label: "Support",
+    value: CONTACT_EMAIL,
+    href: `mailto:${CONTACT_EMAIL}`,
+  },
+  { label: "Office", value: "Minneapolis, MN" },
 ];
 
 export default function ContactPage() {
@@ -42,19 +47,21 @@ export default function ContactPage() {
         <QuoteForm />
         <p className="ns-form-note">
           The form fills out an email for you and opens it in your own mail app,
-          so nothing sends until you send it. Use the dispatch line for anything
-          time-critical.
+          so nothing sends until you send it. For freight questions write{" "}
+          <a href={`mailto:${DISPATCH_EMAIL}`}>{DISPATCH_EMAIL}</a>. For support
+          or site contact, use{" "}
+          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
         </p>
       </section>
 
       <section className="ns-section">
-        <h2>Reach us directly</h2>
+        <h2>Reach us by email</h2>
         <Blueprint className="card">
           <dl className="ns-spec">
-            {details.map(([label, value]) => (
+            {details.map(({ label, value, href }) => (
               <div key={label}>
                 <dt>{label}</dt>
-                <dd>{value}</dd>
+                <dd>{href ? <a href={href}>{value}</a> : value}</dd>
               </div>
             ))}
           </dl>

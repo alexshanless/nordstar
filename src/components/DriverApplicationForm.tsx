@@ -18,13 +18,14 @@ import {
 function applicationHref(data: DriverApplicationInput): string {
   return mailtoUrl({
     to: RESUME_EMAIL,
-    subject: `Driver application: ${data.name}`,
+    subject: `Owner operator application: ${data.name}`,
     lines: bodyLines([
       ["Name", data.name],
       ["Phone", data.phone],
       ["CDL class", data.cdlClass],
       ["Years of experience", data.yearsExperience],
       ["Endorsements", data.endorsements],
+      ["Role", "Owner operator"],
     ]),
   });
 }
@@ -120,7 +121,7 @@ export default function DriverApplicationForm() {
 
       <div className="ns-actions">
         <Blueprint as="button" type="submit" className="btn btn-primary">
-          Apply to drive
+          Apply as owner operator
         </Blueprint>
       </div>
 

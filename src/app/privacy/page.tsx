@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Blueprint from "@/components/Blueprint";
-import { QUOTE_EMAIL } from "@/lib/contact";
+import { CONTACT_EMAIL } from "@/lib/contact";
 import { social } from "@/lib/metadata";
 
 const description =
@@ -96,11 +96,6 @@ export default function PrivacyPage() {
             form also shows a plain email address you can write to directly if
             you would rather skip the form.
           </p>
-          <p>
-            The email addresses the forms use are placeholders right now while
-            the real inboxes are confirmed. Do not send anything sensitive
-            through them until this note is gone.
-          </p>
         </div>
 
         <div>
@@ -162,8 +157,8 @@ export default function PrivacyPage() {
           <h2>Contact</h2>
           <p>
             Privacy questions go to{" "}
-            <a href={`mailto:${QUOTE_EMAIL}`}>{QUOTE_EMAIL}</a>, or to NordStar
-            Freight, Minneapolis, MN.
+            <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>, or to
+            NordStar Freight, Minneapolis, MN.
           </p>
         </div>
       </section>

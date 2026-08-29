@@ -5,27 +5,21 @@ import { RESUME_EMAIL, jobs } from "@/content/jobs";
 import { social } from "@/lib/metadata";
 
 const description =
-  "CDL Class A driver jobs in Minneapolis, MN with NordStar Freight. Regional and over the road lanes, pay and home time in plain numbers, plus dispatch and operations roles.";
+  "Owner operator opportunities with NordStar Freight in Minneapolis, MN. Pay and lane details upon request. Dispatch and operations roles also listed.";
 
 export const metadata: Metadata = {
-  title: "CDL Driver Jobs in Minneapolis, MN",
+  title: "Owner Operator Jobs in Minneapolis, MN",
   description,
   ...social({
-    title: "CDL Driver Jobs in Minneapolis, MN · NordStar Freight",
+    title: "Owner Operator Jobs in Minneapolis, MN · NordStar Freight",
     description,
     url: "/careers",
   }),
 };
 
-/* Placeholder driver facts. Every number here is a stand-in until Alex
-   confirms pay, home time, and the safety record (PLAN.md open question 5). */
 const driverTerms = [
-  ["Pay", "PLACEHOLDER cents per mile, paid weekly, detention and layover paid"],
-  ["Home time", "PLACEHOLDER, regional drivers home most weekends"],
-  ["Lanes", "Upper Midwest core, scheduled runs to the Mountain West and Southeast"],
-  ["Equipment", "PLACEHOLDER average tractor age, automatics, APUs, inverters"],
-  ["Safety record", "PLACEHOLDER CSA scores and preventable accident rate"],
-  ["Benefits", "PLACEHOLDER health, dental, and retirement details"],
+  ["Who we hire", "Owner operators only"],
+  ["Pay and what the job looks like", "Upon request"],
 ];
 
 const driverJobs = jobs.filter((job) => job.type === "driver");
@@ -70,9 +64,9 @@ export default function CareersPage() {
         <p className="ns-eyebrow">Careers</p>
         <h1 className="ns-h1">Drive for NordStar</h1>
         <p className="text-muted ns-lede">
-          Steady lanes, trucks that are maintained on schedule, and a dispatcher
-          who answers the phone. Pay and home time are listed below in plain
-          numbers rather than a range with an asterisk.
+          We lease on owner operators only. Steady Upper Midwest lanes out of
+          Minneapolis, a dispatcher who answers, and terms we walk through with
+          you directly.
         </p>
       </section>
 
@@ -88,19 +82,24 @@ export default function CareersPage() {
             ))}
           </dl>
         </Blueprint>
+        <p className="ns-form-note">
+          Ask when you apply, or write{" "}
+          <a href={`mailto:${RESUME_EMAIL}`}>{RESUME_EMAIL}</a>, and we will
+          send the current pay structure and lane details.
+        </p>
       </section>
 
       <section className="ns-section">
-        <h2>Driving jobs</h2>
+        <h2>Owner operator openings</h2>
         <JobList items={driverJobs} />
       </section>
 
       <section className="ns-section ns-stack">
         <div>
-          <h2>Apply to drive</h2>
+          <h2>Apply as an owner operator</h2>
           <p className="text-muted ns-lede">
-            Four answers is enough to start. A recruiter calls you, and the full
-            application happens on the phone or in the office.
+            Four answers is enough to start. We follow up by email with pay and
+            lane details, then talk through the lease-on.
           </p>
         </div>
         <DriverApplicationForm />

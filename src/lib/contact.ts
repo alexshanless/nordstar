@@ -3,14 +3,18 @@
    already written (Alex's decision, 2026-08-07). There is no server action, no
    provider, and no inbox to keep secrets for.
 
-   Addresses are PLACEHOLDERS until Alex confirms the real inboxes (PLAN.md
-   open questions 2 and 5). The careers address lives with the careers content
-   as `RESUME_EMAIL` in `src/content/jobs.ts`, which is also the address the
-   job cards link to; it is imported from there rather than repeated here.
+   Public contact is email-only. Careers uses `RESUME_EMAIL` in
+   `src/content/jobs.ts` (imported there rather than repeated here).
    ───────────────────────────────────────────────────────────────────────── */
 
-/* PLACEHOLDER inbox for quote requests, pending Alex's confirmation. */
-export const QUOTE_EMAIL = "quotes@nordstarfreightmn.com";
+/** Freight questions and quote requests. */
+export const DISPATCH_EMAIL = "dispatch@nordstarfreightmn.com";
+
+/** Support, site contact, privacy, and terms. */
+export const CONTACT_EMAIL = "admin@nordstarfreightmn.com";
+
+/** Quote form mailto target (same inbox as dispatch questions). */
+export const QUOTE_EMAIL = DISPATCH_EMAIL;
 
 /* A mailto URL the browser hands to the mail client. Values are encoded, so a
    freight description with spaces, ampersands, or line breaks survives. */

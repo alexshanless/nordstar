@@ -7,11 +7,7 @@ import RecruitPlate from "@/components/art/RecruitPlate";
 
 /* Home. Six bands, each linking deeper into the site. Backgrounds are drawn,
    not photographed (PLAN.md open question 4 is still open), so the art is
-   inline SVG in the blueprint grammar, from src/components/art/.
-
-   Hero headline and lede are the original placeholders and stay verbatim
-   until Alex supplies real copy (PLAN.md phase 1, last item). Every number
-   in the spec plate is a placeholder and is labelled as one on the page. */
+   inline SVG in the blueprint grammar, from src/components/art/. */
 
 const services = [
   {
@@ -31,21 +27,19 @@ const services = [
   },
 ];
 
-/* PLACEHOLDER figures, pending the real operating numbers (PLAN.md open
-   question 1). The layout is real so it can be reviewed, the values are not. */
+/* Operating figures Alex confirmed: 3 trucks, about one year in service.
+   No invented on-time or accident rates. */
 const stats = [
-  ["98.4%", "On-time delivery"],
-  ["42", "Lanes running weekly"],
-  ["36", "Tractors in service"],
-  ["11", "Years hauling freight"],
-  ["2.1 yr", "Average tractor age"],
-  ["0.31", "Accidents per million miles"],
+  ["3", "Trucks in service"],
+  ["1 yr", "Operating"],
+  ["MSP", "Minneapolis home base"],
+  ["UMW", "Upper Midwest lanes"],
 ];
 
 const driverPoints = [
-  "Home most weekends on the regional board",
-  "Late model tractors, automatics with APUs and inverters",
-  "PLACEHOLDER cents per mile, paid weekly, detention paid",
+  "Owner operators only",
+  "Pay and lane details upon request",
+  "Upper Midwest runs out of Minneapolis",
 ];
 
 export default function Home() {
@@ -60,8 +54,9 @@ export default function Home() {
           <div className="ns-hero">
             <h1 className="ns-h1">Freight that holds its heading</h1>
             <p className="text-muted ns-lede">
-              NordStar Freight moves loads across the Upper Midwest and beyond.
-              Replace this copy with the real pitch.
+              Asset-based carrier out of Minneapolis. Full truckload, LTL, and
+              expedited freight on Upper Midwest lanes with owner operators and
+              one dispatcher on your account.
             </p>
             <div className="ns-actions">
               <Blueprint as={Link} href="/contact" className="btn btn-primary">
@@ -119,11 +114,6 @@ export default function Home() {
               ))}
             </div>
           </Blueprint>
-          <p className="ns-note">
-            PLACEHOLDER, pending real numbers. These figures are stand-ins so the
-            plate can be reviewed, and they get replaced with audited operating
-            data before launch.
-          </p>
         </section>
 
         {/* 4. Coverage teaser */}
@@ -150,13 +140,8 @@ export default function Home() {
                 so the return leg is planned before the truck leaves.
               </p>
             </div>
-            <Blueprint as="figure" className="card">
+            <Blueprint as="figure" className="card" aria-label="Coverage plot">
               <CoverageFigure />
-              <figcaption>
-                Figure 1. Coverage plot, hub at Minneapolis with core and extended
-                lanes. Abstract line art, not to scale, and the region shown is
-                placeholder geometry pending confirmed coverage.
-              </figcaption>
             </Blueprint>
           </div>
         </section>
@@ -170,15 +155,15 @@ export default function Home() {
         <div className="ns-container ns-band-inner">
           <div className="ns-recruit">
             <div>
-              <p className="ns-eyebrow">Drivers</p>
+              <p className="ns-eyebrow">Owner operators</p>
               <h2>Drive for NordStar</h2>
               <p className="ns-lede">
-                Steady lanes out of Minneapolis, trucks that get replaced on a
-                schedule, and a dispatcher who answers the phone.
+                Lease on with your own tractor. Steady lanes out of Minneapolis
+                and a dispatcher who answers. Pay and terms upon request.
               </p>
               <div className="ns-actions">
                 <Blueprint as={Link} href="/careers" className="btn btn-primary">
-                  See driving jobs
+                  Owner operator openings
                 </Blueprint>
               </div>
             </div>
