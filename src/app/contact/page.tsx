@@ -5,13 +5,13 @@ import { CONTACT_EMAIL, DISPATCH_EMAIL } from "@/lib/contact";
 import { social } from "@/lib/metadata";
 
 const description =
-  "Request a freight quote from NordStar Freight in Minneapolis, MN by email. Origin, destination, and what you are shipping is enough to start.";
+  "Request a freight quote from NordStar Freight in Minneapolis, MN by email. Full truckload, LTL, and expedited. Origin, destination, and load details are enough to start.";
 
 export const metadata: Metadata = {
-  title: "Request a Freight Quote",
+  title: "Request a Freight Quote in Minneapolis, MN",
   description,
   ...social({
-    title: "Request a Freight Quote · NordStar Freight",
+    title: "Request a Freight Quote in Minneapolis, MN · NordStar Freight",
     description,
     url: "/contact",
   }),

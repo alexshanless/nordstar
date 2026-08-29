@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LogoLockup } from "@/components/Logo";
+import { MC_NUMBER, USDOT_NUMBER } from "@/lib/site";
 
 /* Site footer: primary lockup, route links, one line of company facts.
    Rendered from the root layout, so it is identical on every route. */
@@ -24,7 +25,7 @@ export default function Footer() {
           </Link>
         </nav>
         <span className="text-muted ns-footer-meta">
-          Minneapolis, MN · nordstarfreightmn.com
+          Minneapolis, MN · USDOT {USDOT_NUMBER} · {MC_NUMBER}
         </span>
       </div>
     </footer>

@@ -2,15 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Blueprint from "@/components/Blueprint";
 import { social } from "@/lib/metadata";
+import { MC_NUMBER, USDOT_NUMBER } from "@/lib/site";
 
 const description =
-  "NordStar Freight is an asset-based freight carrier in Minneapolis, MN. Owner operators on Upper Midwest lanes, filed authority, and a dispatcher on your account.";
+  `NordStar Freight is an asset-based freight carrier in Minneapolis, MN. Owner operators on Upper Midwest lanes, USDOT ${USDOT_NUMBER}, ${MC_NUMBER}, and a dispatcher on your account.`;
 
 export const metadata: Metadata = {
-  title: "About Our Trucking Company",
+  title: "Asset-Based Freight Carrier in Minneapolis, MN",
   description,
   ...social({
-    title: "About Our Trucking Company · NordStar Freight",
+    title: "Asset-Based Freight Carrier in Minneapolis, MN · NordStar Freight",
     description,
     url: "/about",
   }),
@@ -24,8 +25,8 @@ const coverage = [
 ];
 
 const compliance = [
-  ["USDOT number", "9187143"],
-  ["MC number", "MC-60569221"],
+  ["USDOT number", USDOT_NUMBER],
+  ["MC number", MC_NUMBER],
   ["Safety program", "Pre-trip and post-trip inspections, electronic logging on every truck"],
 ];
 

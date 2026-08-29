@@ -1,13 +1,28 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Boxes, Timer, Truck } from "lucide-react";
 import Blueprint from "@/components/Blueprint";
 import CoverageFigure from "@/components/art/CoverageFigure";
 import HeroPlot from "@/components/art/HeroPlot";
 import RecruitPlate from "@/components/art/RecruitPlate";
+import { social } from "@/lib/metadata";
+import { SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
 
 /* Home. Six bands, each linking deeper into the site. Backgrounds are drawn,
    not photographed (PLAN.md open question 4 is still open), so the art is
    inline SVG in the blueprint grammar, from src/components/art/. */
+
+const title = `${SITE_NAME} · Trucking Company in Minneapolis, MN`;
+
+export const metadata: Metadata = {
+  title: { absolute: title },
+  description: SITE_DESCRIPTION,
+  ...social({
+    title,
+    description: SITE_DESCRIPTION,
+    url: "/",
+  }),
+};
 
 const services = [
   {
