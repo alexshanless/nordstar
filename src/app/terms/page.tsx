@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Blueprint from "@/components/Blueprint";
-import { QUOTE_EMAIL } from "@/lib/contact";
+import { CONTACT_EMAIL } from "@/lib/contact";
 import { social } from "@/lib/metadata";
 
 const description =
@@ -26,7 +26,7 @@ const status = [
   ["Last updated", LAST_UPDATED],
   ["Applies to", "nordstarfreightmn.com, this website only"],
   ["Governing law", "State of Minnesota"],
-  ["Questions", QUOTE_EMAIL],
+  ["Questions", CONTACT_EMAIL],
 ];
 
 export default function TermsPage() {
@@ -81,11 +81,9 @@ export default function TermsPage() {
           <h2>Information is informational</h2>
           <p>
             Everything published here is general information about our services.
-            Several figures on this site are placeholders while the real numbers
-            are confirmed, including authority and insurance lines, phone
-            numbers, and the email addresses the forms use. Nothing on this site
-            is an offer, a rate agreement, or a guarantee of capacity,
-            equipment, transit time, or pay.
+            Several figures on this site are general information and may change.
+            Nothing on this site is an offer, a rate agreement, or a guarantee of
+            capacity, equipment, transit time, or pay.
           </p>
         </div>
 
@@ -103,10 +101,11 @@ export default function TermsPage() {
         <div>
           <h2>Job postings and applications</h2>
           <p>
-            Roles, pay ranges, and benefits described on the careers page are
-            descriptions of open positions, not an offer of employment. Sending
-            a driver application does not create an employment relationship or a
-            promise of hire. Pay and terms are set in a written offer.
+            Roles and requirements described on the careers page are descriptions
+            of open positions, not an offer of employment or a lease-on. Sending
+            an owner operator application does not create an employment
+            relationship, a lease agreement, or a promise of hire. Pay and terms
+            are shared upon request and set in writing.
           </p>
         </div>
 
@@ -165,8 +164,8 @@ export default function TermsPage() {
           <h2>Contact</h2>
           <p>
             Questions about these terms go to{" "}
-            <a href={`mailto:${QUOTE_EMAIL}`}>{QUOTE_EMAIL}</a>, or to NordStar
-            Freight, Minneapolis, MN.
+            <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>, or to
+            NordStar Freight, Minneapolis, MN.
           </p>
         </div>
       </section>

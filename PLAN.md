@@ -110,8 +110,10 @@ on every page, no repeated corner-mark JSX in pages.
       company, email, phone, origin, destination, freight description.
 - [x] Delivery: mailto, zero backend (Alex's decision, 2026-08-07). Valid
       submit composes a prefilled mailto to the inbox; server actions and
-      the log seam removed. Addresses (quotes@ / careers@nordstarfreightmn.com)
-      are placeholders pending confirmation.
+      the log seam removed. Public contact is email-only:
+      `dispatch@nordstarfreightmn.com` (questions / quotes) and
+      `admin@nordstarfreightmn.com` (support / contact). Careers still uses
+      `careers@nordstarfreightmn.com`.
 - [x] Zod validation client-side from the shared schemas; error and success
       states styled from the tokens (no browser defaults).
 
@@ -165,13 +167,17 @@ delivery path as the quote form.
 
 ## Open questions (need Alex, do not guess)
 
-1. Real copy: services offered, coverage area, differentiators, compliance
-   numbers (MC/USDOT lines are placeholders in the handoff).
-2. Delivery mechanism decided: mailto, zero backend (2026-08-07). Still
-   need the real inboxes — quotes@ and careers@nordstarfreightmn.com are
-   invented placeholders.
+1. Real copy polish still open where needed. Confirmed: MC-60569221, USDOT
+   9187143, 3 trucks, ~1 year operating, email-only contact, owner-operator
+   recruiting. Insurance certificate on request (limits not published).
+2. Delivery mechanism decided: mailto, zero backend (2026-08-07). Public
+   contact inboxes confirmed: `dispatch@nordstarfreightmn.com` (questions /
+   quotes) and `admin@nordstarfreightmn.com` (support / contact). Email-only,
+   no public phone lines.
 3. Resolved 2026-08-08: Vercel account alexshanless, domain
    nordstarfreightmn.com (registered at Porkbun, DNS pending).
 4. Photography: is there real imagery, or ship type-only until there is?
-5. Careers: real open roles and driver pay/home-time facts, and where
-   applications should deliver (same inbox as quotes, or a recruiting one?).
+5. Careers: owner-operator only for drivers; pay and what the job looks like
+   are upon request. Still need confirmed OO lease-on details if they should
+   be published later, and whether office applications stay on
+   careers@nordstarfreightmn.com.

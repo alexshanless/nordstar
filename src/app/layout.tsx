@@ -64,7 +64,7 @@ export const viewport: Viewport = {
 };
 
 /* Organization schema for search engines. Only facts already published on
-   the site; compliance numbers and phone lines join once Alex confirms them. */
+   the site. */
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",

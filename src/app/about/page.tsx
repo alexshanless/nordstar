@@ -4,7 +4,7 @@ import Blueprint from "@/components/Blueprint";
 import { social } from "@/lib/metadata";
 
 const description =
-  "NordStar Freight is an asset based freight carrier in Minneapolis, MN. Our own trucks and drivers, Upper Midwest lanes, and our safety and compliance record.";
+  "NordStar Freight is an asset-based freight carrier in Minneapolis, MN. Owner operators on Upper Midwest lanes, filed authority, and a dispatcher on your account.";
 
 export const metadata: Metadata = {
   title: "About Our Trucking Company",
@@ -16,20 +16,16 @@ export const metadata: Metadata = {
   }),
 };
 
-/* Placeholder copy. Coverage claims and the compliance numbers below are
-   stand-ins until Alex confirms them (PLAN.md open question 1). */
-
 const coverage = [
   ["Home base", "Minneapolis, MN"],
   ["Core region", "Minnesota, Wisconsin, Iowa, the Dakotas, Illinois"],
   ["Extended lanes", "Mountain West and Southeast on scheduled runs"],
-  ["Equipment", "Dry van and reefer, tractors on a placeholder replacement cycle"],
+  ["Equipment", "3 trucks, dry van and reefer"],
 ];
 
 const compliance = [
-  ["USDOT number", "PLACEHOLDER, pending confirmation"],
-  ["MC number", "PLACEHOLDER, pending confirmation"],
-  ["Insurance", "PLACEHOLDER limits, certificate available on request"],
+  ["USDOT number", "9187143"],
+  ["MC number", "MC-60569221"],
   ["Safety program", "Pre-trip and post-trip inspections, electronic logging on every truck"],
 ];
 
@@ -40,9 +36,9 @@ export default function AboutPage() {
         <p className="ns-eyebrow">About</p>
         <h1 className="ns-h1">A carrier, not a middleman</h1>
         <p className="text-muted ns-lede">
-          NordStar Freight owns the trucks and employs the drivers that move your
-          freight. One dispatcher owns your lane, and the person who answers the
-          phone can tell you where the load is.
+          Asset-based freight out of Minneapolis with owner operators on the
+          lane. One dispatcher owns your account, and you reach us by email when
+          you need a rate or a status check.
         </p>
       </section>
 
@@ -77,9 +73,8 @@ export default function AboutPage() {
       <section className="ns-section">
         <h2>Safety and compliance</h2>
         <p className="text-muted ns-lede">
-          The authority and insurance lines below are placeholders. They are
-          published here so the layout is real, and they get replaced with the
-          filed numbers before launch.
+          Filed authority below. An insurance certificate is available on
+          request when you book a load.
         </p>
         <Blueprint className="card">
           <dl className="ns-spec">
@@ -96,7 +91,7 @@ export default function AboutPage() {
             Request a quote
           </Blueprint>
           <Link href="/careers" className="btn btn-ghost">
-            Drive for us
+            Owner operator openings
           </Link>
         </div>
       </section>
